@@ -18,18 +18,26 @@ the code inside the conf is "bash" and the filename sets the order.
 
 You can use this base image to build any X application and
 share it with RDP. The /etc map can be mounted as a volume.
-When you mount an empty /etc at startup the docker-entrypoint.sh
-script will copy the contents of the map /etc_entrypoint to /etc.
+At startup the docker-entrypoint.sh script will copy the 
+contents of the map /etc_entrypoint to /etc.
 You can add services in supervisor by adding a .conf file to
-/etc(_entrypoint)/supervisor/conf.d/
+/etc_entrypoint/supervisor/conf.d/
 The entrypoint needed for your service can be added to
-/etc(_entrypoint)/entrypoint.d/
+/etc_entrypoint/entrypoint.d/
 
+Dockerfile example
+```
+FROM base
+MAINTAINER Daniel Guerra
+RUN apt-get update
+RUN apt-get -yy install ubuntu-mate-desktop
+RUN echo "mate-session" > /etc_entrypoint/skel/.Xclients
+```
 
 ## Xsession startup
 
 For starting a desktop environment use the .Xclients file and
-put it in /etc/skel/.Xlients
+put it in /etc_entrypoint/skel/.Xlients
 For XCFE4 use xfce4-session
 For Mate use mate-ssesion 
 After creating a new user all files from /etc/skel are copied
@@ -74,7 +82,7 @@ echo "[program:mysqld] \
 command= /usr/sbin/mysqld \
 user=mysql \
 autorestart=true \
-priority=100" > /etc/supervisor/conf.d/mysql.conf
+priority=100" > /etc_entrypoint/supervisor/conf.d/mysql.conf
 supervisorctl update
 ```
 
@@ -90,6 +98,6 @@ Example: Add mysql entrypoint
 
 ```bash
 echo "mkdir -p /var/lib/mysql \
-chown -R mysql:mysql /var/lib/mysql" > /etc/entrypoint.d/06-mysql.conf
+chown -R mysql:mysql /var/lib/mysql" > /etc_entrypoint/entrypoint.d/06-mysql.conf
 
 ```

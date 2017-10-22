@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # prepare the etc dir
-if [ ! -f "/etc/passwd" ];
-then
-		cp -R /etc_entrypoint/* /etc/
-fi
+cp -R /etc_entrypoint/* /etc/
 
 # read entrypoint.d configuration
 for x in `find /etc/entrypoint.d -name '*.conf' | sort`;

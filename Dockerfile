@@ -75,6 +75,6 @@ RUN rm -rf /etc_entrypoint/xrdp/rsakeys.ini /etc/xrdp/rsakeys.ini /etc_entrypoin
 # Docker config
 
 VOLUME ["/etc","/home"]
-EXPOSE 3389 22 9001
+EXPOSE 3389 9001
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 CMD ["supervisord"]
