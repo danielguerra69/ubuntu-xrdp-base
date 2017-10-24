@@ -17,13 +17,11 @@ the code inside the conf is "bash" and the filename sets the order.
 ## Building
 
 You can use this base image to build any X application and
-share it with RDP. The /etc map can be mounted as a volume.
-At startup the docker-entrypoint.sh script will copy the 
-contents of the map /etc_entrypoint to /etc.
+share it with RDP. 
 You can add services in supervisor by adding a .conf file to
-/etc_entrypoint/supervisor/conf.d/
+/etc/supervisor/conf.d/
 The entrypoint needed for your service can be added to
-/etc_entrypoint/entrypoint.d/
+/etc/entrypoint.d/
 
 Dockerfile example
 ```
@@ -48,8 +46,8 @@ to the user map.
 Start the rdp server, the /etc and /home dir can be used as a volume 
 
 ```bash
-docker run -d --name uxrdp --hostname terminalserver -v /tmp/etc:/etc \
- -v /tmp/home:/home -p 3389:3389 -p 2222:22 danielguerra/ubuntu-xrdp-base
+docker run -d --name uxrdp --hostname terminalserver -v /tmp/home:/home \
+  -p 3389:3389 -p 2222:22 danielguerra/ubuntu-xrdp-base
 ```
 *note if you allready use a rdp server on 3389 change -p <my-port>:3389
 	  -p 2222:22 is for ssh access ( ssh -p 2222 ubuntu@<docker-ip> )

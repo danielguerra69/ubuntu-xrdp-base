@@ -62,15 +62,10 @@ RUN cp /etc/X11/xrdp/xorg.conf /etc/X11
 RUN sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini
 RUN locale-gen en_US.UTF-8
 
-# Prepare entrypoint etc base
-
-RUN cp -R /etc /etc_entrypoint
-
 
 # Clean preconfigured stuff
 
-RUN rm -rf /etc_entrypoint/xrdp/rsakeys.ini /etc/xrdp/rsakeys.ini /etc_entrypoint/xrdp/*.pem \
- 		   /etc_entrypoint/resolv.conf /etc_entrypoint/hostname /etc_entrypoint/hosts
+RUN rm -rf /etc/xrdp/rsakeys.ini /etc/xrdp/rsakeys.ini /etc/xrdp/*.pem 
 
 # Docker config
 
