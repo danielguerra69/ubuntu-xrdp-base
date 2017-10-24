@@ -29,13 +29,13 @@ FROM base
 MAINTAINER Daniel Guerra
 RUN apt-get update
 RUN apt-get -yy install ubuntu-mate-desktop
-RUN echo "mate-session" > /etc_entrypoint/skel/.Xclients
+RUN echo "mate-session" > /etc/skel/.Xclients
 ```
 
 ## Xsession startup
 
 For starting a desktop environment use the .Xclients file and
-put it in /etc_entrypoint/skel/.Xlients
+put it in /etc/skel/.Xlients
 For XCFE4 use xfce4-session
 For Mate use mate-ssesion 
 After creating a new user all files from /etc/skel are copied
@@ -80,7 +80,7 @@ echo "[program:mysqld] \
 command= /usr/sbin/mysqld \
 user=mysql \
 autorestart=true \
-priority=100" > /etc_entrypoint/supervisor/conf.d/mysql.conf
+priority=100" > /etc/supervisor/conf.d/mysql.conf
 supervisorctl update
 ```
 
@@ -96,6 +96,6 @@ Example: Add mysql entrypoint
 
 ```bash
 echo "mkdir -p /var/lib/mysql \
-chown -R mysql:mysql /var/lib/mysql" > /etc_entrypoint/entrypoint.d/06-mysql.conf
+chown -R mysql:mysql /var/lib/mysql" > /etc/entrypoint.d/06-mysql.conf
 
 ```
